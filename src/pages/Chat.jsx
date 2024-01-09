@@ -19,7 +19,7 @@ export default function Chat() {
   }
 
   function submitHandler(data) {
-    console.log("chat message", data);
+    console.log("chat data", data);
     const msg = {
       sender: "user",
       message: data.chatMessage,
