@@ -1,4 +1,5 @@
-const URL = "http://127.0.0.1:5000/upload";
+// const URL = "http://127.0.0.1:5000/upload";
+const URL = "http://127.0.0.1:5000/ask";
 
 export async function uploadFile(data) {
   console.log("raw data", data);
