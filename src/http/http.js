@@ -7,7 +7,7 @@ export async function uploadFile(data) {
   form_data.append("query", data.chatMessage);
   if (data.uploadFile[0].length != 0) {
     console.log("File  is there");
-    form_data.append("file", data.file);
+    form_data.append("file", data.uploadFile[0]);
   }
   console.log("formdata", form_data.get("query"));
   console.log("formdata", form_data.get("file"));
