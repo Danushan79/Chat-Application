@@ -59,7 +59,6 @@ export default function ChatForm({ upload }) {
             <input
               className="file-input"
               type="file"
-              multiple
               {...register("file")}
               onChange={handleFile}
             />
