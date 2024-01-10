@@ -32,7 +32,7 @@ export default function ChatForm({ upload }) {
     };
     console.log("msg", msg);
     reset();
-    // upload(msg);
+    upload(msg);
     setUploadedFiles([]);
     dispatch(sendMessage(msg));
   }
