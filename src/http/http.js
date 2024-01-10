@@ -2,7 +2,6 @@
 const URL = "http://127.0.0.1:5000/ask";
 
 export async function uploadFile(data) {
-  console.log("raw data", data.uploadFile[0]);
   var form_data = new FormData();
   form_data.append("query", data.message);
   if (data.files.length != 0) {
