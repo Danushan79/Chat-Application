@@ -34,7 +34,7 @@ const sampleChatHistory = [
 ];
 let initialState = {
   chat: [],
-  filename: "",
+  filename: [],
   // file: JSON.stringify({}),
 };
 if (localStorage.getItem("chatState") === null) {
@@ -49,10 +49,17 @@ export const ChatSlice = createSlice({
   initialState,
   reducers: {
     sendMessage: (state, action) => {
+      const filenames = [];
+      const files = action.payload.files;
+      // console.log(action.payload.files);
+      files.forEach((element) => {
+        filenames.push(element.name);
+      });
+      console.log(filenames);
       const obj = {
         sender: "user",
-        message: action.payload,
-        filename: state.filename,
+        message: action.payload.message,
+        filename: filenames,
       };
       state.chat = [...state.chat, obj];
       state.filename = "";
@@ -60,10 +67,6 @@ export const ChatSlice = createSlice({
       localStorage.setItem("chatState", JSON.stringify(state));
     },
     addFile: (state, action) => {
-      const file = action.payload;
-      console.log(file);
-      console.log(JSON.stringify(file));
-      state.filename = file.name;
       // state.file = JSON.stringify(file);
       localStorage.setItem("chatState", JSON.stringify(state));
       console.log("state", JSON.stringify(file));

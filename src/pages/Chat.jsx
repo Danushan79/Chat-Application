@@ -1,37 +1,30 @@
 import { useForm } from "react-hook-form";
-import ChatField from "../Components/modules/ChatField";
+import ChatField from "../Components/modules/ChatForm.jsx";
 import ChatHistory from "../Components/organisms/ChatHistory";
-import image from "../assets/image.svg";
 import { useDispatch } from "react-redux";
 import { sendMessage, clearState, responseMessage } from "../redux/chatSlice";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 import { uploadFile } from "../http/http.js";
+import ChatForm from "../Components/modules/ChatForm.jsx";
 
 export default function Chat() {
   const { register, reset, handleSubmit } = useForm();
   const messages = useSelector((state) => state.ChatSlice.chat);
+  const files = useSelector((state) => state.ChatSlice.files);
   const dispatch = useDispatch();
 
   async function upload(data) {
+    console.log("before upload, data", data);
     const response = await uploadFile(data);
     console.log("bot respone", response);
     dispatch(responseMessage(response));
   }
 
-  function submitHandler(data) {
-    console.log("chat message", data);
-    const msg = {
-      sender: "user",
-      message: data.chatMessage,
-    };
-    console.log("msg", msg);
-    upload(data);
-    reset();
-    dispatch(sendMessage(data.chatMessage));
-  }
   function handleClear() {
     dispatch(clearState());
   }
+
   return (
     <>
       <div>
@@ -43,9 +36,7 @@ export default function Chat() {
       <div className="chat-window">
         <div>
           <ChatHistory messages={messages} />
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <ChatField register={register} image={image} />
-          </form>
+          <ChatForm upload={upload} />
         </div>
       </div>
     </>
